@@ -95,7 +95,7 @@ export class CopybaraAction {
       } else
         exit(
           51,
-          'The current repo is neither the SoT nor destination repo. You need to set a value for "workflow" or run this action in the SoT or destination repo.'
+          'The current repo is neither the SoT nor destination repo. You need to set a value for "workflow" or run this action in the SoT or destination repo.',
         );
     }
 
@@ -120,7 +120,7 @@ export class CopybaraAction {
     return !(await this.getGitHubClient().branchExists(
       this.config.destination.repo,
       await this.getDestinationBranch(),
-      this.config.createRepo
+      this.config.createRepo,
     ));
   }
 
@@ -147,7 +147,7 @@ export class CopybaraAction {
 
     // Upload Copybara config as an artifact
     if (core.isDebug()) {
-      const artifactClient = artifact.create();
+      const artifactClient = new artifact.DefaultArtifactClient();
       artifactClient.uploadArtifact("copy.bara.sky", [hostConfig.cbConfigPath], homedir());
     }
   }

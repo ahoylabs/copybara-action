@@ -14,8 +14,7 @@ export const exitCodes: {
     type: "error",
   },
   2: {
-    msg:
-      "Error in the configuration, flags values or in general an error attributable to the user. Check the logs for details.",
+    msg: "Error in the configuration, flags values or in general an error attributable to the user. Check the logs for details.",
     ns: "copybara",
     type: "error",
   },
@@ -55,12 +54,12 @@ export const exitCodes: {
     type: "error",
   },
   52: {
-    msg: "Unexpected error running Copybara. Please open an issue on olivr/copybara-action.",
+    msg: "Unexpected error running Copybara. Please open an issue on ahoylabs/copybara-action.",
     ns: "action",
     type: "error",
   },
   53: {
-    msg: "Unexpected error. Please open an issue on olivr/copybara-action.",
+    msg: "Unexpected error. Please open an issue on ahoylabs/copybara-action.",
     ns: "action",
     type: "error",
   },
@@ -85,16 +84,22 @@ export function exit(exitCode: number, message = "") {
   core.setOutput("msg", msg);
 
   switch (ec.type) {
-    case "success":
+    case "success": {
       core.info(msg);
       process.exit(0); // eslint-disable-line no-process-exit
+      break;
+    }
 
-    case "warning":
+    case "warning": {
       core.warning(msg);
       process.exit(0); // eslint-disable-line no-process-exit
+      break;
+    }
 
-    default:
+    default: {
       core.setFailed(msg);
       process.exit(1); // eslint-disable-line no-process-exit
+      break;
+    }
   }
 }
